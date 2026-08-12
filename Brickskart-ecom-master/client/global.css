@@ -1,0 +1,573 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 48 18% 97%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --primary: 0 71% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 44 88% 50%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 0 0% 93%;
+    --muted-foreground: 0 0% 50%;
+
+    --accent: 0 71% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 90%;
+    --input: 48 18% 95%;
+    --ring: 0 71% 53%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 48 18% 97%;
+
+    --sidebar-foreground: 0 0% 25%;
+
+    --sidebar-primary: 0 71% 53%;
+
+    --sidebar-primary-foreground: 0 0% 100%;
+
+    --sidebar-accent: 44 88% 50%;
+
+    --sidebar-accent-foreground: 0 0% 15%;
+
+    --sidebar-border: 0 0% 88%;
+
+    --sidebar-ring: 0 71% 53%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@keyframes blueprintMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 50px 50px;
+  }
+}
+
+.blueprint-animation {
+  animation: blueprintMove 12s linear infinite;
+}
+
+@keyframes craneMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-30px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.crane-animation {
+  animation: craneMove 3s ease-in-out infinite;
+}
+
+/* Construction Measurement Animation */
+@keyframes measurementMove {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.3;
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.measurement-line {
+  animation: measurementMove 8s linear infinite;
+}
+.construction-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.brick,
+.crane,
+.cement {
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.15;
+}
+
+.brick1 {
+  left: 10%;
+  bottom: -50px;
+  animation: moveUp 8s linear infinite;
+}
+
+.brick2 {
+  left: 50%;
+  bottom: -50px;
+  animation: moveUp 11s linear infinite;
+  animation-delay: 2s;
+}
+
+.brick3 {
+  left: 80%;
+  bottom: -50px;
+  animation: moveUp 9s linear infinite;
+  animation-delay: 4s;
+}
+
+.crane {
+  top: 20%;
+  left: -80px;
+  animation: moveRight 15s linear infinite;
+}
+
+.cement {
+  top: 60%;
+  right: -80px;
+  animation: moveLeft 18s linear infinite;
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-110vh);
+  }
+}
+
+@keyframes moveRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-110vw);
+  }
+}
+/* =========================================
+   AESTHETIC CONSTRUCTION BACKGROUND
+   ========================================= */
+
+.construction-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(139, 30, 63, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(217, 166, 181, 0.12),
+      transparent 30%
+    );
+}
+
+
+/* Blueprint Grid */
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(139, 30, 63, 0.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(139, 30, 63, 0.07) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+
+  animation: gridMove 15s linear infinite;
+
+  opacity: 0.7;
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 50px 50px;
+  }
+}
+
+
+/* Construction Lines */
+
+.construction-line {
+  position: absolute;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 30, 63, 0.35),
+    rgba(139, 30, 63, 0.7),
+    transparent
+  );
+
+  box-shadow: 0 0 10px rgba(139, 30, 63, 0.2);
+}
+
+.line-one {
+  width: 45%;
+  top: 22%;
+  left: -45%;
+
+  animation: lineMove 9s linear infinite;
+}
+
+.line-two {
+  width: 35%;
+  top: 65%;
+  left: -35%;
+
+  animation: lineMove 12s linear infinite;
+  animation-delay: 3s;
+}
+
+.line-three {
+  width: 25%;
+  top: 82%;
+  left: -25%;
+
+  animation: lineMove 15s linear infinite;
+  animation-delay: 5s;
+}
+
+@keyframes lineMove {
+  from {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(320%);
+    opacity: 0;
+  }
+}
+
+
+/* Floating Bricks */
+
+.floating-brick {
+  position: absolute;
+  font-size: 42px;
+
+  filter: drop-shadow(
+    0 5px 8px rgba(139, 30, 63, 0.18)
+  );
+
+  opacity: 0.35;
+}
+
+.brick-one {
+  left: 8%;
+  bottom: -60px;
+
+  animation: brickFloat 11s linear infinite;
+}
+
+.brick-two {
+  left: 28%;
+  bottom: -60px;
+
+  animation: brickFloat 14s linear infinite;
+  animation-delay: 3s;
+}
+
+.brick-three {
+  left: 68%;
+  bottom: -60px;
+
+  animation: brickFloat 12s linear infinite;
+  animation-delay: 5s;
+}
+
+.brick-four {
+  left: 88%;
+  bottom: -60px;
+
+  animation: brickFloat 16s linear infinite;
+  animation-delay: 7s;
+}
+
+@keyframes brickFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: translateY(-50vh) rotate(180deg);
+  }
+
+  90% {
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: translateY(-115vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+/* Crane */
+
+.floating-crane {
+  position: absolute;
+
+  top: 12%;
+  right: -100px;
+
+  font-size: 75px;
+
+  opacity: 0.28;
+
+  filter: drop-shadow(
+    0 8px 12px rgba(139, 30, 63, 0.2)
+  );
+
+  animation: craneFloat 12s ease-in-out infinite;
+}
+
+@keyframes craneFloat {
+  0% {
+    transform: translateX(0) rotate(-3deg);
+  }
+
+  50% {
+    transform: translateX(-120px) rotate(3deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(-3deg);
+  }
+}
+
+
+/* Cement / Construction Icon */
+
+.floating-cement {
+  position: absolute;
+
+  left: -80px;
+  top: 55%;
+
+  font-size: 60px;
+
+  opacity: 0.25;
+
+  animation: cementMove 14s ease-in-out infinite;
+}
+
+@keyframes cementMove {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(160px) rotate(10deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+
+/* Glowing Particles */
+
+.particle {
+  position: absolute;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #8B1E3F;
+
+  opacity: 0.25;
+
+  box-shadow:
+    0 0 10px rgba(139, 30, 63, 0.5);
+
+  animation: particleFloat 6s ease-in-out infinite;
+}
+
+.particle-one {
+  left: 15%;
+  top: 30%;
+}
+
+.particle-two {
+  left: 35%;
+  top: 75%;
+  animation-delay: 1s;
+}
+
+.particle-three {
+  left: 60%;
+  top: 25%;
+  animation-delay: 2s;
+}
+
+.particle-four {
+  left: 80%;
+  top: 55%;
+  animation-delay: 3s;
+}
+
+.particle-five {
+  left: 92%;
+  top: 80%;
+  animation-delay: 4s;
+}
+
+@keyframes particleFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: translateY(-35px) scale(1.5);
+    opacity: 0.4;
+  }
+}
