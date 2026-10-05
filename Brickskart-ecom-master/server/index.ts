@@ -4,6 +4,9 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import productRoutes from "./routes/products";
 import addProductRoutes from "./routes/addProduct";
+import orderRoutes from "./routes/orders";
+import userRoutes from "./routes/users";
+
 
 export function createServer() {
   const app = express();
@@ -21,6 +24,8 @@ export function createServer() {
 
   app.use("/api/products", productRoutes);
   app.use("/api/add-product", addProductRoutes);
+  app.use("/api/orders", orderRoutes);
+  app.use("/api/users", userRoutes);
 
   return app;
 }

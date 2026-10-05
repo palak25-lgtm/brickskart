@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "aos": "^2.3.4",
     "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.8"
   }
 }

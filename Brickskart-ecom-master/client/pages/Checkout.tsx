@@ -127,7 +127,7 @@ const Checkout = () => {
     const selectedPaymentMethod = paymentMethod;
 
     // Simulate payment processing
-    setTimeout(() => {
+    setTimeout(async () => {
       const order = {
         id: orderId,
         items: cartItems,
@@ -139,7 +139,25 @@ const Checkout = () => {
       };
 
       // Save order
-      saveOrder(order);
+      console.log("SENDING ORDER TO BACKEND");
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_email: address.email,
+          full_name: address.fullName,
+          phone: address.phone,
+          street: address.street,
+          city: address.city,
+          state: address.state,
+          pincode: address.pincode,
+          total_amount: orderTotal,
+          payment_method: selectedPaymentMethod,
+        }),
+      });
+      console.log("ORDER RESPONSE:", response.status);
 
       // Save details for confirmation screen
       setConfirmedOrder({
@@ -565,8 +583,8 @@ const Checkout = () => {
                   type="submit"
                   disabled={isProcessing}
                   className={`w-full px-6 py-3 font-bold rounded-lg transition-colors ${isProcessing
-                      ? "bg-gray-400 text-white cursor-not-allowed"
-                      : "bg-[#8B1E3F] text-white hover:bg-[#6F1832]"
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : "bg-[#8B1E3F] text-white hover:bg-[#6F1832]"
                     }`}
                 >
                   {isProcessing ? "Processing..." : "Place Order"}

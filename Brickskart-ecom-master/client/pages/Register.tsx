@@ -15,7 +15,7 @@ const Register = () => {
   });
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -45,14 +45,44 @@ const Register = () => {
       return;
     }
 
-    // Save user
-    saveUser({
-      email: formData.email,
-      name: formData.name,
-      phone: formData.phone,
-    });
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          mail: formData.email,
+          phone: formData.phone,
+          passsword: formData.password,
+          role: "user",
+        }),
+      });
 
-    navigate("/shop");
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Registration failed");
+        return;
+      }
+
+      console.log("User registered:", data);
+
+      // Save user locally
+      saveUser({
+        email: formData.email,
+        name: formData.name,
+        phone: formData.phone,
+      });
+
+      alert("Account created successfully!");
+
+      navigate("/shop");
+    } catch (error) {
+      console.error("Registration error:", error);
+      setError("Cannot connect to server");
+    }
   };
 
   return (

@@ -2,7 +2,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Minus, Plus, ShoppingCart, Zap } from "lucide-react";
 import Layout from "@/components/Layout";
-import products from "@/data/products.json";
+
 import { addToCart, getUser } from "@/utils/storage";
 
 import { useEffect, useState } from "react";
@@ -28,18 +28,16 @@ const ProductDetails = () => {
   }, [id]);
 
   if (!product) {
-  return (
-    <Layout>
-      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold mb-4">Loading Product...</h1>
-      </div>
-    </Layout>
-  );
-}
+    return (
+      <Layout>
+        <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+          <h1 className="text-3xl font-bold mb-4">Loading Product...</h1>
+        </div>
+      </Layout>
+    );
+  }
 
-  const relatedProducts = products.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  );
+  const relatedProducts = [];
 
   const handleAddToCart = () => {
     if (!user) {
@@ -48,8 +46,8 @@ const ProductDetails = () => {
     }
 
     addToCart({
-      id: product.id,
-      name: product.name,
+      id: product.product_id,
+      name: product.product_name,
       price: product.price,
       quantity,
       image: product.image,
@@ -66,8 +64,8 @@ const ProductDetails = () => {
     }
 
     addToCart({
-      id: product.id,
-      name: product.name,
+      id: product.product_id,
+      name: product.product_name,
       price: product.price,
       quantity,
       image: product.image,
@@ -108,11 +106,10 @@ const ProductDetails = () => {
 
             <div className="flex items-center gap-4 mb-6">
               <span className="text-3xl font-bold text-[#B22222]">₹{product.price}</span>
-              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                product.stock > 0
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}>
+              <span className={`px-3 py-1 rounded-full text-sm font-semibold ${product.stock > 0
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
+                }`}>
                 {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
               </span>
             </div>

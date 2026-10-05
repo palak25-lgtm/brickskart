@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { LogIn } from "lucide-react";
-import Layout from "@/components/Layout";
+
 import { saveUser } from "@/utils/storage";
 
 const Login = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,44 +39,66 @@ const Login = () => {
   };
 
   return (
-    <Layout>
-      <div className="min-h-screen flex items-center justify-center bg-[#F8E8ED]/40 px-4 py-8">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-[#D9A6B5]/40 p-8">
+    
+      <div className="min-h-screen flex items-center justify-center bg-[#F5EBDD] px-4 py-8">
+
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-[#E5D2BD] p-8">
+
+          {/* Login Icon */}
           <div className="flex justify-center mb-6">
-            <LogIn className="w-12 h-12 text-[#8B1E3F]" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#7A3E24]">
+              <LogIn className="w-9 h-9 text-[#F5EBDD]" />
+            </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-center mb-2">Welcome Back</h1>
-          <p className="text-gray-600 text-center mb-8">
+          {/* Heading */}
+          <h1 className="text-3xl font-bold text-center mb-2 text-[#3B2416]">
+            Welcome Back
+          </h1>
+
+          <p className="text-[#7A3E24] text-center mb-8">
             Log in to your account to continue
           </p>
 
+          {/* Error */}
           {error && (
-            <div className="mb-6 p-4 bg-red-100 text-red-800 rounded-lg font-semibold">
+            <div className="mb-6 p-4 bg-[#F5EBDD] border border-[#C89B5A] text-[#7A3E24] rounded-lg font-semibold">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+
+            {/* Email */}
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+              <label className="block text-[#3B2416] font-semibold mb-2">
                 Email Address
               </label>
+
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setFormData({
+                    ...formData,
+                    email: e.target.value,
+                  })
                 }
                 placeholder="Enter your email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B1E3F]" />
-              <p className="text-xs text-gray-500 mt-1">
+                required
+                className="w-full px-4 py-3 border border-[#E5D2BD] rounded-lg bg-[#FDF9F4] text-[#3B2416] placeholder-[#A98C76] focus:outline-none focus:ring-2 focus:ring-[#9B5738] focus:border-[#9B5738]"
+              />
+
+              <p className="text-xs text-[#8A7868] mt-1">
                 Demo: Use any email address
               </p>
             </div>
 
+            {/* Password */}
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">
+
+              <label className="block text-[#3B2416] font-semibold mb-2">
                 Password
               </label>
 
@@ -82,51 +106,79 @@ const Login = () => {
                 type="password"
                 value={formData.password}
                 onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
+                  setFormData({
+                    ...formData,
+                    password: e.target.value,
+                  })
                 }
                 placeholder="Enter your password"
-                className="relative z-10 w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#8B1E3F]"
+                required
+                className="relative z-10 w-full px-4 py-3 border border-[#E5D2BD] rounded-lg bg-[#FDF9F4] text-[#3B2416] placeholder-[#A98C76] focus:outline-none focus:ring-2 focus:ring-[#9B5738] focus:border-[#9B5738]"
               />
 
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-[#8A7868] mt-1">
                 Demo: Use any password
               </p>
+
             </div>
+
+            {/* Login Button */}
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-[#8B1E3F] text-white font-bold rounded-lg hover:bg-[#6F1832] transition-colors mt-6"            >
+              className="w-full px-6 py-3 bg-[#7A3E24] text-[#F5EBDD] font-bold rounded-lg hover:bg-[#3B2416] transition-all duration-300 shadow-md hover:shadow-lg mt-6"
+            >
               Log In
             </button>
+
           </form>
 
-          <div className="mt-8 p-4 bg-[#F8E8ED] border border-[#D9A6B5] rounded-lg">
-            <p className="text-sm text-[#6F1832]">
-              <strong>Demo Account:</strong> This is a demo login. Use any email
-              and password to create a test account.
+          {/* Demo Account */}
+          <div className="mt-8 p-4 bg-[#F5EBDD] border border-[#C89B5A] rounded-lg">
+
+            <p className="text-sm text-[#7A3E24]">
+              <strong className="text-[#3B2416]">
+                Demo Account:
+              </strong>{" "}
+              This is a demo login. Use any email and password to create
+              a test account.
             </p>
+
           </div>
 
+          {/* Register */}
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+
+            <p className="text-[#7A3E24]">
+
               Don't have an account?{" "}
+
               <Link
                 to="/register"
-                className="text-[#8B1E3F] hover:underline font-semibold"              >
+                className="text-[#7A3E24] hover:text-[#3B2416] hover:underline font-semibold"
+              >
                 Register here
               </Link>
+
             </p>
+
           </div>
 
+          {/* Back to Shop */}
           <div className="mt-4 text-center">
+
             <Link
               to="/shop"
-              className="text-[#8B1E3F] hover:underline text-sm"            >
+              className="text-[#9B5738] hover:text-[#3B2416] hover:underline text-sm font-semibold"
+            >
               ← Back to Shop
             </Link>
+
           </div>
+
         </div>
-      </div >
-    </Layout >
+
+      </div>
+    
   );
 };
 

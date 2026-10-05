@@ -1,5 +1,7 @@
 import "./global.css";
 
+
+
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -29,6 +31,12 @@ import ProjectPlanner from "./pages/ProjectPlanner";
 import BulkOrder from "./pages/BulkOrder";
 import AdminDashboard from "./pages/AdminDashboard";
 import AddProduct from "./pages/AddProduct";
+import BudgetEstimator from "@/pages/BudgetEstimator";
+import DeliveryTracker from "./pages/DeliveryTracker";
+import ProjectProgress from "./pages/ProjectProgress";
+import QuotationEstimator from "./pages/QuotationEstimator";
+import EMICalculator from "./pages/EMICalculator";
+import WallXRay from "./pages/WallXRay";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -58,7 +66,31 @@ const App = () => (
           <Route path="/bulk-order" element={<BulkOrder />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/budget-estimator" element={<BudgetEstimator />} />
+          <Route path="/delivery-tracker" element={<DeliveryTracker />} />
+
+          <Route
+            path="/emi-calculator"
+            element={<EMICalculator />}
+          />
+
+          <Route
+            path="/project-progress"
+            element={<ProjectProgress />}
+          />
+
+          <Route
+            path="/quotation-estimator"
+            element={<QuotationEstimator />}
+          />
+
+          <Route
+            path="/wall-xray"
+            element={<WallXRay />}
+          />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
